@@ -159,9 +159,8 @@ def upload_video(youtube, video_path: Path, title: str, description: str,
 # the uploader once to re-authenticate with the expanded scope.
 
 
-def upload_caption(video_id: str, srt_path: str, language: str = "en") -> bool:
+def upload_caption(youtube, video_id: str, srt_path: str, language: str = "en") -> bool:
     """Upload SRT captions to an existing YouTube video. Returns True on success."""
-    youtube = get_authenticated_service()
     from googleapiclient.http import MediaFileUpload
     try:
         youtube.captions().insert(
@@ -170,7 +169,7 @@ def upload_caption(video_id: str, srt_path: str, language: str = "en") -> bool:
                 "snippet": {
                     "videoId": video_id,
                     "language": language,
-                    "name": "English",
+                    "name": language.upper(),
                     "isDraft": False,
                 }
             },
@@ -183,14 +182,16 @@ def upload_caption(video_id: str, srt_path: str, language: str = "en") -> bool:
         return False
 
 
-def upload_thumbnail(video_id: str, thumbnail_path: str) -> bool:
+def upload_thumbnail(youtube, video_id: str, thumbnail_path: str) -> bool:
     """Upload a thumbnail image to an existing YouTube video. Returns True on success."""
-    youtube = get_authenticated_service()
+    import mimetypes
     from googleapiclient.http import MediaFileUpload
+    mime, _ = mimetypes.guess_type(thumbnail_path)
+    mime = mime or "image/png"
     try:
         youtube.thumbnails().set(
             videoId=video_id,
-            media_body=MediaFileUpload(thumbnail_path, mimetype="image/png"),
+            media_body=MediaFileUpload(thumbnail_path, mimetype=mime),
         ).execute()
         print(f"  Thumbnail uploaded for video {video_id}")
         return True
@@ -199,9 +200,8 @@ def upload_thumbnail(video_id: str, thumbnail_path: str) -> bool:
         return False
 
 
-def set_public(video_id: str) -> bool:
+def set_public(youtube, video_id: str) -> bool:
     """Change a YouTube video's privacy status to public. Returns True on success."""
-    youtube = get_authenticated_service()
     try:
         youtube.videos().update(
             part="status",
