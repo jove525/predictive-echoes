@@ -27,8 +27,7 @@ from config.settings import (
 # ── OAuth + API setup ──────────────────────────────────────────────────────────
 
 SCOPES = [
-    "https://www.googleapis.com/auth/youtube.upload",
-    "https://www.googleapis.com/auth/youtube.readonly",
+    "https://www.googleapis.com/auth/youtube",  # full scope — required for captions + thumbnails
 ]
 TOKEN_FILE = ROOT / "config" / "youtube_token.json"
 CLIENT_SECRET_FILE = ROOT / "config" / "client_secret.json"
