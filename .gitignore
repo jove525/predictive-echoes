@@ -18,6 +18,8 @@ assets/*.mp4
 # YouTube OAuth token (generated at runtime)
 config/token.json
 config/token.pickle
+config/youtube_token.json
+config/client_secret.json
 
 # Logs
 logs/*.log
