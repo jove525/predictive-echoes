@@ -10,11 +10,10 @@ venv/
 env/
 
 # Outputs (large files)
-outputs/drafts/*.mp4
-outputs/published/*.mp4
-outputs/archive/*.mp4
-assets/footage/*.mp4
-assets/audio/*.mp3
+outputs/
+assets/footage/
+assets/audio/
+assets/*.mp4
 
 # YouTube OAuth token (generated at runtime)
 config/token.json
