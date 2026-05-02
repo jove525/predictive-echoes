@@ -1,0 +1,45 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# Outputs (large files)
+outputs/drafts/*.mp4
+outputs/published/*.mp4
+outputs/archive/*.mp4
+assets/footage/*.mp4
+assets/audio/*.mp3
+
+# YouTube OAuth token (generated at runtime)
+config/token.json
+config/token.pickle
+
+# Logs
+logs/*.log
+logs/*.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Orchestrator runtime files
+orchestrator/state/*.db
+orchestrator/logs/*.log
+orchestrator/config/token.json
+orchestrator/config/__pycache__/
+orchestrator/__pycache__/
+
+# Internal
+CLAUDE.md
+CLAUDE_MEMORY.md
+ACTIVITY_LOG.md
+ACTIVITY_LOG.md.bak
+memory/
+docs/superpowers/
+*.bak
